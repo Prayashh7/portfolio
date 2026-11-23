@@ -1,0 +1,305 @@
+/*
+  About, Services, Skills and Record. These four sections share one structural
+  idea: a hairline marks where a block starts, and the space around it does the
+  rest. No card borders, no filled panels.
+*/
+
+/* ---------------------------------------------------------------- headings */
+
+.section-head--split {
+  max-width: none;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: var(--space-6) var(--space-8);
+}
+
+.section-head__main {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--container-text);
+}
+
+.section-head__aside {
+  justify-self: end;
+}
+
+/* ---------------------------------------------------------------- about */
+
+.about {
+  display: grid;
+  grid-template-columns: minmax(0, 0.76fr) minmax(0, 1fr);
+  gap: clamp(var(--space-6), 5vw, var(--space-9));
+  align-items: start;
+}
+
+.about__figure {
+  position: relative;
+}
+
+/*
+  The frame is offset down and to the right of the photograph, so the picture
+  reads as placed on the page rather than boxed in. It is drawn at z-index 0
+  with the image lifted to 1 — pushing the frame to a negative z-index would
+  send it behind the section background and out of sight.
+*/
+.about__figure::before {
+  content: "";
+  position: absolute;
+  inset: var(--space-5) calc(var(--space-5) * -1) calc(var(--space-5) * -1) var(--space-5);
+  z-index: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+}
+
+.about__image {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: auto;
+  border-radius: var(--radius);
+  box-shadow: var(--shadow-mid);
+}
+
+.about__body {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 54ch;
+}
+
+.about__paragraph {
+  color: var(--ink-80);
+  font-size: var(--text-lg);
+}
+
+.about__paragraph:first-child {
+  color: var(--ink);
+}
+
+/* ---------------------------------------------------------------- services */
+
+.services {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8) var(--space-7);
+}
+
+.service {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.service:hover {
+  border-top-color: var(--line-accent);
+}
+
+.service__icon {
+  width: 1.5rem;
+  height: 1.5rem;
+  color: var(--cyan);
+}
+
+.service__name {
+  font-size: var(--text-xl);
+}
+
+.service__text {
+  color: var(--ink-62);
+  max-width: 44ch;
+}
+
+.service__stack {
+  margin-top: var(--space-1);
+}
+
+/* ---------------------------------------------------------------- skills */
+
+.skills {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  gap: var(--space-8) var(--space-6);
+}
+
+.group {
+  display: grid;
+  gap: var(--space-4);
+  align-content: start;
+}
+
+.group__name {
+  padding-bottom: var(--space-3);
+  border-bottom: 1px solid var(--line-strong);
+  font-size: var(--text-base);
+  font-weight: 600;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.group__note {
+  color: var(--ink-38);
+  font-size: var(--text-sm);
+  margin-top: calc(var(--space-2) * -1);
+}
+
+.group__list {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.skill {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.skill__name {
+  color: var(--ink-80);
+  font-size: var(--text-sm);
+}
+
+.skill__note {
+  grid-column: 1 / -1;
+  color: var(--ink-38);
+  font-size: var(--text-xs);
+  line-height: 1.5;
+}
+
+/* Three ticks, filled left to right. A number here would imply a precision
+   nobody can measure; three steps is as much as the claim is worth. */
+.meter {
+  display: inline-flex;
+  gap: 3px;
+}
+
+.meter__step {
+  width: 0.875rem;
+  height: 2px;
+  background: var(--line-strong);
+  border-radius: var(--radius-pill);
+}
+
+.meter__step[data-on] {
+  background: var(--cyan);
+}
+
+/* ---------------------------------------------------------------- record */
+
+.record {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
+  gap: var(--space-8) var(--space-9);
+  align-items: start;
+}
+
+.record__column {
+  display: grid;
+  gap: var(--space-8);
+  align-content: start;
+}
+
+.record__block {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.record__label {
+  color: var(--cyan);
+  font-weight: 400;
+}
+
+.record__list {
+  display: grid;
+  gap: var(--space-6);
+}
+
+.entry {
+  display: grid;
+  gap: var(--space-2);
+  padding-left: var(--space-5);
+  border-left: 1px solid var(--line);
+}
+
+.entry__head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-4);
+}
+
+.entry__heading {
+  font-size: var(--text-lg);
+}
+
+.entry__range {
+  flex-shrink: 0;
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-mono);
+  color: var(--muted);
+}
+
+.entry__org {
+  color: var(--ink-80);
+  font-size: var(--text-sm);
+}
+
+.entry__location {
+  color: var(--ink-38);
+}
+
+.entry__text {
+  color: var(--ink-62);
+  font-size: var(--text-sm);
+  max-width: 52ch;
+}
+
+.entry__link {
+  justify-self: start;
+  margin-top: var(--space-2);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cyan);
+  border-bottom: 1px solid transparent;
+  transition: border-color var(--dur) var(--ease-out);
+}
+
+.entry__link:hover {
+  border-bottom-color: currentColor;
+}
+
+/* ---------------------------------------------------------------- narrow */
+
+@media (max-width: 900px) {
+  .about {
+    grid-template-columns: 1fr;
+    gap: var(--space-7);
+  }
+
+  /* The photograph keeps its own column at this width instead of stretching
+     across the screen, which would make a portrait crop absurdly tall. */
+  .about__figure {
+    max-width: 22rem;
+  }
+
+  .services {
+    grid-template-columns: 1fr;
+    gap: var(--space-6);
+  }
+}
+
+@media (max-width: 760px) {
+  .section-head--split {
+    grid-template-columns: 1fr;
+  }
+
+  .section-head__aside {
+    justify-self: start;
+  }
+}

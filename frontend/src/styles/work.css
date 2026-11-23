@@ -1,0 +1,394 @@
+/*
+  The work list and the case pages. Projects are full-width rows rather than a
+  grid of cards: at this count the imagery is the argument, and a card would
+  shrink it. Rows alternate side so scrolling has a rhythm, and nothing is
+  numbered — the order is not a ranking.
+*/
+
+.work {
+  display: grid;
+  gap: var(--space-9);
+}
+
+.project {
+  display: grid;
+  grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+  gap: var(--space-5) clamp(var(--space-6), 4vw, var(--space-8));
+  align-items: start;
+  padding-top: var(--space-5);
+  border-top: 1px solid var(--line);
+}
+
+.project__meta {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-2) var(--space-5);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+}
+
+.project__category {
+  color: var(--cyan);
+}
+
+.project__facts {
+  display: flex;
+  gap: var(--space-5);
+  color: var(--muted);
+}
+
+.project__year {
+  color: var(--ink-38);
+}
+
+.project__media {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 1400 / 900;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.project__image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--dur-slow) var(--ease-out);
+}
+
+.project:hover .project__image {
+  transform: scale(1.035);
+}
+
+.project__live {
+  position: absolute;
+  top: var(--space-4);
+  right: var(--space-4);
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-2);
+  padding: var(--space-2) var(--space-3);
+  background: var(--glass);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--ink-80);
+}
+
+.project__live-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--positive);
+  box-shadow: 0 0 0 3px rgb(52 211 153 / 0.18);
+}
+
+/* A single pass of light across the image on hover. The gradient is off-canvas
+   until then, so nothing sits on top of the picture at rest. */
+.project__sheen {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(
+    100deg,
+    transparent 34%,
+    rgb(245 247 250 / 0.09) 50%,
+    transparent 66%
+  );
+  transform: translateX(-100%);
+  transition: transform 900ms var(--ease-out);
+}
+
+.project:hover .project__sheen {
+  transform: translateX(100%);
+}
+
+.project__body {
+  display: grid;
+  gap: var(--space-4);
+  align-content: center;
+  min-height: 100%;
+}
+
+.project__name {
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-display);
+}
+
+.project__name a {
+  background-image: linear-gradient(currentColor, currentColor);
+  background-repeat: no-repeat;
+  background-position: 0 100%;
+  background-size: 0 1px;
+  transition: background-size var(--dur) var(--ease-out);
+}
+
+.project__name a:hover,
+.project__name a:focus-visible {
+  background-size: 100% 1px;
+}
+
+.project__summary {
+  color: var(--ink-62);
+  max-width: 46ch;
+}
+
+.project__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* Alternating sides. The meta line holds row 1 across both columns, so the
+   media and the copy are placed explicitly on row 2. */
+.project:nth-child(even) .project__media {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.project:nth-child(even) .project__body {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+/* ---------------------------------------------------------------- repository */
+
+.repo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-5);
+  margin-top: var(--space-9);
+  padding: var(--space-6);
+  background: radial-gradient(120% 180% at 0% 0%, var(--wash-cyan), transparent 70%);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.repo__text {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.repo__label {
+  color: var(--cyan);
+}
+
+.repo__handle {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  letter-spacing: var(--tracking-tight);
+}
+
+/* ---------------------------------------------------------------- case page */
+
+.case {
+  padding-block: calc(var(--header-h) + var(--space-8)) var(--space-section);
+}
+
+.case__back,
+.case__next-link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+  transition: color var(--dur) var(--ease-out);
+}
+
+.case__back:hover,
+.case__next-link:hover {
+  color: var(--ink);
+}
+
+.case__head {
+  display: grid;
+  gap: var(--space-5);
+  max-width: var(--container-text);
+  margin-block: var(--space-7) var(--space-8);
+}
+
+.case__meta {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--cyan);
+}
+
+.case__title {
+  font-size: var(--text-display-sm);
+  letter-spacing: var(--tracking-display);
+}
+
+.case__lede {
+  color: var(--ink-80);
+  font-size: var(--text-lg);
+  max-width: 48ch;
+}
+
+.case__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+.case__cover {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-lg);
+}
+
+.case__cover img {
+  width: 100%;
+  height: auto;
+}
+
+.case__body {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 17rem);
+  gap: clamp(var(--space-6), 5vw, var(--space-9));
+  align-items: start;
+  margin-top: var(--space-8);
+}
+
+.case__notes {
+  display: grid;
+  gap: var(--space-5);
+  max-width: 62ch;
+  color: var(--ink-80);
+  font-size: var(--text-lg);
+}
+
+.case__side {
+  position: sticky;
+  top: calc(var(--header-h) + var(--space-5));
+  display: grid;
+  gap: var(--space-5);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+}
+
+.facts {
+  display: grid;
+  gap: var(--space-4);
+}
+
+.fact {
+  display: grid;
+  gap: var(--space-1);
+}
+
+.fact__key {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.fact__value {
+  color: var(--ink);
+}
+
+.case__stack {
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line);
+}
+
+.case__gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr));
+  gap: var(--space-5);
+  margin-top: var(--space-9);
+}
+
+.case__gallery figure {
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.case__gallery img {
+  width: 100%;
+  height: auto;
+}
+
+.case__next {
+  margin-top: var(--space-section);
+  padding-top: var(--space-6);
+  border-top: 1px solid var(--line);
+}
+
+.case__next-link {
+  flex-wrap: wrap;
+  gap: var(--space-2) var(--space-5);
+}
+
+.case__next-name {
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  letter-spacing: var(--tracking-display);
+  text-transform: none;
+  color: var(--ink);
+}
+
+.case__missing {
+  display: grid;
+  justify-items: center;
+  gap: var(--space-6);
+  padding-block: calc(var(--header-h) + var(--space-9)) var(--space-section);
+}
+
+/* ---------------------------------------------------------------- narrow */
+
+@media (max-width: 900px) {
+  .work {
+    gap: var(--space-8);
+  }
+
+  .project {
+    grid-template-columns: 1fr;
+  }
+
+  /* One column: the alternating placement is undone so every row reads
+     image then copy. */
+  .project:nth-child(even) .project__media {
+    grid-column: 1;
+    grid-row: 2;
+  }
+
+  .project:nth-child(even) .project__body {
+    grid-column: 1;
+    grid-row: 3;
+  }
+
+  .project__body {
+    min-height: 0;
+  }
+
+  .case__body {
+    grid-template-columns: 1fr;
+  }
+
+  .case__side {
+    position: static;
+  }
+}

@@ -1,0 +1,3 @@
+# The router handles /work/:slug and /admin/* on the client, so every path has to
+# be served index.html rather than a 404 from the host.
+/*    /index.html   200

@@ -1,0 +1,283 @@
+/*
+  The hero: display lockup on the left, point-cloud portrait on the right, and a
+  strip of real facts along the bottom. One soft wash sits behind the portrait —
+  the only ambient light on the page.
+*/
+
+.hero {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  min-height: 100svh;
+  padding-top: calc(var(--header-h) + var(--space-6));
+  padding-bottom: var(--space-6);
+  overflow: hidden;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  top: -18%;
+  right: -10%;
+  width: min(64rem, 115%);
+  aspect-ratio: 1;
+  background: radial-gradient(circle at 58% 42%, var(--wash-indigo), transparent 62%);
+  pointer-events: none;
+}
+
+.hero__grid {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: center;
+  align-content: center;
+  gap: clamp(var(--space-5), 4vw, var(--space-8));
+}
+
+.hero__copy {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  justify-items: start;
+  gap: var(--space-5);
+}
+
+/* Keeps the display type legible where the point cloud drifts behind it. */
+.hero__copy::before {
+  content: "";
+  position: absolute;
+  inset: -12% -18% -12% -30%;
+  background: radial-gradient(ellipse at 40% 50%, var(--void) 42%, transparent 72%);
+  z-index: -1;
+  pointer-events: none;
+}
+
+.hero__lockup {
+  display: grid;
+  margin: 0;
+}
+
+/* The name rises out of this mask on load rather than fading in. */
+.hero__mask {
+  display: block;
+  overflow: hidden;
+  padding-bottom: 0.06em;
+  margin-bottom: -0.06em;
+}
+
+.hero__name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: clamp(3.25rem, 9vw, 7rem);
+  font-weight: 700;
+  line-height: 0.86;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+}
+
+.hero__title {
+  display: block;
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--line-strong);
+  font-family: var(--font-mono);
+  font-size: clamp(0.625rem, 1.05vw, 0.8125rem);
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-transform: uppercase;
+  color: var(--ink-80);
+}
+
+.hero__headline {
+  max-width: 26ch;
+  font-family: var(--font-display);
+  font-size: var(--text-2xl);
+  font-weight: 500;
+  line-height: 1.16;
+  letter-spacing: var(--tracking-tight);
+  text-wrap: balance;
+}
+
+.hero__lede {
+  max-width: 44ch;
+  font-size: var(--text-lg);
+  color: var(--ink-62);
+}
+
+.hero__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+  margin-top: var(--space-2);
+}
+
+/* ---------------------------------------------------------------- portrait */
+
+.hero__visual {
+  position: relative;
+  justify-self: center;
+  height: min(74vh, 42rem);
+  max-width: 100%;
+  aspect-ratio: 0.6975;
+}
+
+.portrait__canvas,
+.portrait__still {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.portrait__still {
+  object-fit: contain;
+}
+
+/* -------------------------------------------------------------------- meta */
+
+.hero__meta {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-7);
+  margin-top: var(--space-7);
+  padding-top: var(--space-5);
+}
+
+.hero__meta::before {
+  content: "";
+  position: absolute;
+  inset-inline: var(--gutter);
+  top: 0;
+  height: 1px;
+  background: var(--line);
+}
+
+.hero__fact {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.hero__fact-key {
+  font-family: var(--font-mono);
+  font-size: 0.5625rem;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.hero__fact-value {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  font-weight: 300;
+  color: var(--ink-80);
+}
+
+.hero__fact--status {
+  flex-direction: row;
+  align-items: center;
+  gap: var(--space-3);
+  max-width: 34ch;
+  margin-left: auto;
+}
+
+.hero__fact--status .hero__fact-value {
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  color: var(--ink-62);
+}
+
+.hero__dot {
+  flex: none;
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background: var(--muted);
+  box-shadow: 0 0 0 4px rgb(152 162 179 / 0.12);
+}
+
+/* The one pulsing element on the site, because it reports something that is
+   actually live: whether he is taking work. */
+.hero__fact--status[data-status="open"] .hero__dot {
+  background: var(--positive);
+  box-shadow: 0 0 0 4px rgb(52 211 153 / 0.14);
+  animation: status-pulse 2.6s var(--ease-in-out) infinite;
+}
+
+.hero__fact--status[data-status="limited"] .hero__dot {
+  background: var(--warning);
+  box-shadow: 0 0 0 4px rgb(251 191 36 / 0.14);
+}
+
+.hero__fact--status[data-status="closed"] .hero__dot {
+  background: var(--danger);
+  box-shadow: 0 0 0 4px rgb(248 113 113 / 0.14);
+}
+
+@keyframes status-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 4px rgb(52 211 153 / 0.14);
+  }
+  50% {
+    box-shadow: 0 0 0 7px rgb(52 211 153 / 0.05);
+  }
+}
+
+/* ------------------------------------------------------------- responsive */
+
+@media (max-width: 960px) {
+  .hero {
+    min-height: auto;
+    padding-bottom: var(--space-8);
+  }
+
+  .hero__grid {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  /* Portrait first, then the name overlapping where the point cloud dissolves. */
+  .hero__visual {
+    order: -1;
+    height: min(48vh, 27rem);
+    justify-self: start;
+  }
+
+  .hero__copy {
+    margin-top: calc(var(--space-6) * -1);
+    gap: var(--space-4);
+  }
+
+  .hero__copy::before {
+    inset: -8% -20% -8% -20%;
+  }
+
+  .hero__headline {
+    font-size: var(--text-xl);
+    max-width: 30ch;
+  }
+}
+
+@media (max-width: 620px) {
+  .hero__meta {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+  }
+
+  .hero__fact--status {
+    margin-left: 0;
+  }
+
+  .hero__actions .button {
+    flex: 1 1 auto;
+    justify-content: center;
+  }
+}

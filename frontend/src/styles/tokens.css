@@ -1,0 +1,120 @@
+/*
+  Design tokens. Every colour, size and timing on the site resolves to something here.
+  The palette is fixed; the derived values below are the only place transparency,
+  line weights and surface tints are defined.
+*/
+
+:root {
+  /* Base palette */
+  --void: #07090d;
+  --surface: #0d1117;
+  --ink: #f5f7fa;
+  --muted: #98a2b3;
+  --cyan: #22d3ee;
+  --violet: #8b5cf6;
+  --indigo: #6366f1;
+
+  /* Derived ink */
+  --ink-80: rgb(245 247 250 / 0.8);
+  --ink-62: rgb(245 247 250 / 0.62);
+  --ink-38: rgb(245 247 250 / 0.38);
+
+  /* Derived surfaces and lines */
+  --surface-raised: #111823;
+  --glass: rgb(13 17 23 / 0.66);
+  --line: rgb(245 247 250 / 0.09);
+  --line-strong: rgb(245 247 250 / 0.18);
+  --line-accent: rgb(34 211 238 / 0.4);
+
+  /* Accent washes. Used behind content, never on it. */
+  --wash-cyan: rgb(34 211 238 / 0.08);
+  --wash-violet: rgb(139 92 246 / 0.1);
+  --wash-indigo: rgb(99 102 241 / 0.12);
+
+  /* Semantic */
+  --positive: #34d399;
+  --warning: #fbbf24;
+  --danger: #f87171;
+
+  /* Type families.
+     Archivo carries the display voice — a grotesque with enough width to feel engineered.
+     Instrument Sans is quieter and reads well at length.
+     Martian Mono is reserved for data: coordinates, years, counts, labels. */
+  --font-display: "Archivo", "Helvetica Neue", "Arial Narrow", system-ui, sans-serif;
+  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "Martian Mono", ui-monospace, "SF Mono", "Cascadia Mono", monospace;
+
+  /* Fluid type scale. Minimums are readable on a 360px phone. */
+  --text-xs: 0.6875rem;
+  --text-sm: 0.8125rem;
+  --text-base: clamp(0.9375rem, 0.9rem + 0.15vw, 1.0625rem);
+  --text-lg: clamp(1.0625rem, 0.99rem + 0.32vw, 1.25rem);
+  --text-xl: clamp(1.25rem, 1.13rem + 0.5vw, 1.625rem);
+  --text-2xl: clamp(1.625rem, 1.4rem + 1vw, 2.375rem);
+  --text-3xl: clamp(2.125rem, 1.6rem + 2.2vw, 3.5rem);
+  --text-display: clamp(2.75rem, 1.1rem + 7.2vw, 8rem);
+  --text-display-sm: clamp(2.25rem, 1.4rem + 3.6vw, 4.5rem);
+
+  --leading-tight: 0.94;
+  --leading-snug: 1.14;
+  --leading-body: 1.62;
+
+  --tracking-display: -0.035em;
+  --tracking-tight: -0.015em;
+  --tracking-label: 0.16em;
+  --tracking-mono: 0.02em;
+
+  /* Space scale. Section rhythm comes from --space-section. */
+  --space-1: 0.25rem;
+  --space-2: 0.5rem;
+  --space-3: 0.75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-section: clamp(5rem, 3rem + 9vw, 11rem);
+
+  /* Layout */
+  --container: 84rem;
+  --container-text: 46rem;
+  --gutter: clamp(1.25rem, 0.6rem + 3vw, 4rem);
+  --header-h: 4.5rem;
+
+  --radius-sm: 4px;
+  --radius: 8px;
+  --radius-lg: 16px;
+  --radius-pill: 999px;
+
+  --shadow-low: 0 1px 2px rgb(0 0 0 / 0.4);
+  --shadow-mid: 0 12px 32px -12px rgb(0 0 0 / 0.7);
+  --shadow-high: 0 32px 80px -32px rgb(0 0 0 / 0.85);
+  --glow-cyan: 0 0 0 1px rgb(34 211 238 / 0.3), 0 8px 40px -12px rgb(34 211 238 / 0.35);
+
+  /* Motion. One easing for entrances, one for interface response. */
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 160ms;
+  --dur: 320ms;
+  --dur-slow: 720ms;
+  --dur-reveal: 1100ms;
+
+  --z-canvas: 0;
+  --z-content: 10;
+  --z-header: 100;
+  --z-overlay: 200;
+  --z-toast: 300;
+}
+
+/* Anyone who has asked their system to calm down gets a static site: content in
+   place, no transforms, no ambient drift. Handled once, here and in base.css. */
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-fast: 1ms;
+    --dur: 1ms;
+    --dur-slow: 1ms;
+    --dur-reveal: 1ms;
+  }
+}

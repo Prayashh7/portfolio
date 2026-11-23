@@ -1,0 +1,25 @@
+{
+  "name": "prayash-portfolio-frontend",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "description": "Public portfolio and admin dashboard for prayashbartaula.com.np",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "sitemap": "node scripts/sitemap.mjs"
+  },
+  "dependencies": {
+    "@react-three/fiber": "^8.17.10",
+    "gsap": "^3.12.5",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-router-dom": "^6.26.2",
+    "three": "^0.169.0"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.3.2",
+    "vite": "^5.4.8"
+  }
+}

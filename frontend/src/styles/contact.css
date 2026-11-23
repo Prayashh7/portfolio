@@ -1,0 +1,238 @@
+/*
+  Contact. The channels sit beside the form rather than under it, so someone who
+  would rather email directly does not have to scroll past a form to find the
+  address.
+*/
+
+.contact {
+  display: grid;
+  grid-template-columns: minmax(0, 0.68fr) minmax(0, 1fr);
+  gap: clamp(var(--space-6), 5vw, var(--space-9));
+  align-items: start;
+}
+
+/* Both columns are grid items holding long strings — an email address, a form
+   field. Without this they refuse to shrink below their content. */
+.contact__channels,
+.contact__form {
+  min-width: 0;
+}
+
+.channels {
+  display: grid;
+  border-top: 1px solid var(--line);
+}
+
+.channel {
+  display: grid;
+  gap: var(--space-1);
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--line);
+}
+
+.channel__key {
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.channel__value {
+  overflow-wrap: anywhere;
+  color: var(--ink);
+}
+
+.channel__value--link {
+  border-bottom: 1px solid var(--line-strong);
+  justify-self: start;
+  transition:
+    color var(--dur) var(--ease-out),
+    border-color var(--dur) var(--ease-out);
+}
+
+.channel__value--link:hover {
+  color: var(--cyan);
+  border-bottom-color: var(--line-accent);
+}
+
+/* ---------------------------------------------------------------- form */
+
+.form {
+  display: grid;
+  gap: var(--space-5);
+}
+
+.form__row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-5);
+}
+
+.field {
+  display: grid;
+  gap: var(--space-2);
+}
+
+.field__label {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--space-3);
+  font-family: var(--font-mono);
+  font-size: var(--text-xs);
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+.field__hint {
+  text-transform: none;
+  letter-spacing: 0;
+  color: var(--ink-38);
+}
+
+.field__input {
+  width: 100%;
+  padding: var(--space-3) var(--space-4);
+  background: rgb(245 247 250 / 0.03);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-size: var(--text-base);
+  transition:
+    border-color var(--dur) var(--ease-out),
+    background-color var(--dur) var(--ease-out);
+}
+
+.field__input::placeholder {
+  color: var(--ink-38);
+}
+
+.field__input:hover {
+  border-color: var(--line-strong);
+}
+
+.field__input:focus {
+  outline: none;
+  border-color: var(--cyan);
+  background: rgb(34 211 238 / 0.04);
+}
+
+/* The border already carries the focus state, so the global ring is dropped
+   here to avoid two indicators on the same element. */
+.field__input:focus-visible {
+  outline: none;
+}
+
+.field__input:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+
+.field__input--area {
+  resize: vertical;
+  min-height: 9rem;
+  line-height: var(--leading-body);
+}
+
+.field[data-invalid] .field__label {
+  color: var(--danger);
+}
+
+.field[data-invalid] .field__input {
+  border-color: var(--danger);
+}
+
+.field__error {
+  color: var(--danger);
+  font-size: var(--text-sm);
+}
+
+.form__failure {
+  padding: var(--space-4);
+  background: rgb(248 113 113 / 0.08);
+  border: 1px solid rgb(248 113 113 / 0.32);
+  border-radius: var(--radius);
+  color: var(--ink);
+  font-size: var(--text-sm);
+}
+
+.form__foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-4) var(--space-5);
+}
+
+.form__note {
+  color: var(--ink-38);
+  font-size: var(--text-sm);
+  max-width: 34ch;
+}
+
+.form__spinner {
+  width: 0.875rem;
+  height: 0.875rem;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: form-spin 700ms linear infinite;
+}
+
+@keyframes form-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Reduced motion turns transitions off globally, so the spinner would freeze
+   mid-rotation and read as broken. It becomes a steady dot instead. */
+@media (prefers-reduced-motion: reduce) {
+  .form__spinner {
+    border-top-color: currentColor;
+    animation: none;
+  }
+}
+
+/* ---------------------------------------------------------------- sent */
+
+.form--sent {
+  justify-items: start;
+  gap: var(--space-4);
+  padding: var(--space-6);
+  background: radial-gradient(140% 160% at 0% 0%, var(--wash-cyan), transparent 70%);
+  border: 1px solid var(--line-accent);
+  border-radius: var(--radius-lg);
+}
+
+.form__sent-mark {
+  display: grid;
+  place-items: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border: 1px solid var(--line-accent);
+  border-radius: 50%;
+  color: var(--cyan);
+  font-size: var(--text-lg);
+}
+
+.form__sent-text {
+  color: var(--ink-80);
+  font-size: var(--text-lg);
+  max-width: 40ch;
+}
+
+/* ---------------------------------------------------------------- narrow */
+
+@media (max-width: 900px) {
+  .contact {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 560px) {
+  .form__row {
+    grid-template-columns: 1fr;
+  }
+}
