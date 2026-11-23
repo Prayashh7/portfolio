@@ -33,9 +33,12 @@ export const login = asyncHandler(async (req, res) => {
   if (!user || !passwordMatches) throw unauthorized(SAME_ANSWER_EITHER_WAY);
 
   await query("UPDATE users SET last_login_at = now() WHERE id = $1", [user.id]);
-  issueSession(res, user);
+  const csrfToken = issueSession(res, user);
 
-  res.json({ user: { id: user.id, email: user.email, name: user.name, role: user.role } });
+  res.json({
+  user: { id: user.id, email: user.email, name: user.name, role: user.role },
+  csrfToken,
+});
 });
 
 export const logout = asyncHandler(async (req, res) => {
@@ -51,5 +54,8 @@ export const me = asyncHandler(async (req, res) => {
     clearSession(res);
     throw unauthorized("That account no longer exists.");
   }
-  res.json({ user: rows[0] });
+  res.json({
+  user: rows[0],
+  csrfToken: req.user.csrf,
+});
 });

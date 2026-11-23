@@ -1,3 +1,4 @@
+
 /*
   The one place the frontend talks to the API. Both the public site and the admin
   dashboard import from here.
@@ -5,6 +6,7 @@
 
 const API_BASE = trimSlash(import.meta.env.VITE_API_BASE_URL || "/api");
 const MEDIA_BASE = trimSlash(import.meta.env.VITE_MEDIA_BASE_URL || deriveMediaBase());
+let csrfToken = null;
 
 function trimSlash(value) {
   return value.replace(/\/+$/, "");
@@ -39,23 +41,20 @@ export class ApiError extends Error {
   }
 }
 
-function readCookie(name) {
-  const match = document.cookie.match(new RegExp(`(?:^|; )${name}=([^;]*)`));
-  return match ? decodeURIComponent(match[1]) : null;
-}
-
 async function request(path, { method = "GET", body, signal, isFormData = false } = {}) {
   const headers = {};
-  if (body !== undefined && !isFormData) headers["Content-Type"] = "application/json";
 
-  /* Double-submit CSRF: echo the readable cookie back in a header. The session
-     cookie itself is httpOnly, so this is the only token JavaScript can see. */
-  if (method !== "GET") {
-    const csrf = readCookie("csrf_token");
-    if (csrf) headers["X-CSRF-Token"] = csrf;
+  if (body !== undefined && !isFormData) {
+    headers["Content-Type"] = "application/json";
+  }
+
+  // Send the CSRF token received from the API with every non-GET request.
+  if (method !== "GET" && csrfToken) {
+    headers["X-CSRF-Token"] = csrfToken;
   }
 
   let response;
+
   try {
     response = await fetch(`${API_BASE}${path}`, {
       method,
@@ -73,8 +72,19 @@ async function request(path, { method = "GET", body, signal, isFormData = false 
 
   const payload = await response.json().catch(() => null);
 
+  // Clear an expired session's CSRF token.
+  if (response.status === 401) {
+    csrfToken = null;
+  }
+
+  // Store the token returned by login or session restoration (/auth/me).
+  if (payload?.csrfToken) {
+    csrfToken = payload.csrfToken;
+  }
+
   if (!response.ok) {
     const detail = payload?.error;
+
     throw new ApiError(detail?.message || `Request failed (${response.status})`, {
       status: response.status,
       fields: detail?.fields || null,
@@ -87,15 +97,23 @@ async function request(path, { method = "GET", body, signal, isFormData = false 
 /* ------------------------------------------------------------------ public */
 
 export const getPortfolio = (signal) => request("/portfolio", { signal });
-export const getProject = (slug, signal) => request(`/projects/${encodeURIComponent(slug)}`, { signal });
-export const sendMessage = (payload) => request("/contact", { method: "POST", body: payload });
+
+export const getProject = (slug, signal) =>
+  request(`/projects/${encodeURIComponent(slug)}`, { signal });
+
+export const sendMessage = (payload) =>
+  request("/contact", { method: "POST", body: payload });
 
 /* -------------------------------------------------------------------- auth */
 
 export const login = (email, password) =>
   request("/auth/login", { method: "POST", body: { email, password } });
-export const logout = () => request("/auth/logout", { method: "POST" });
-export const getCurrentUser = (signal) => request("/auth/me", { signal });
+
+export const logout = () =>
+  request("/auth/logout", { method: "POST" });
+
+export const getCurrentUser = (signal) =>
+  request("/auth/me", { signal });
 
 /* ------------------------------------------------------------------- admin */
 
@@ -113,41 +131,71 @@ export const ADMIN_RESOURCES = [
   "social-links",
 ];
 
-export const adminList = (resource, signal) => request(`/admin/${resource}`, { signal });
-export const adminGet = (resource, id, signal) => request(`/admin/${resource}/${id}`, { signal });
-export const adminCreate = (resource, body) => request(`/admin/${resource}`, { method: "POST", body });
+export const adminList = (resource, signal) =>
+  request(`/admin/${resource}`, { signal });
+
+export const adminGet = (resource, id, signal) =>
+  request(`/admin/${resource}/${id}`, { signal });
+
+export const adminCreate = (resource, body) =>
+  request(`/admin/${resource}`, { method: "POST", body });
+
 export const adminUpdate = (resource, id, body) =>
   request(`/admin/${resource}/${id}`, { method: "PUT", body });
-export const adminRemove = (resource, id) => request(`/admin/${resource}/${id}`, { method: "DELETE" });
 
-export const getOverview = (signal) => request("/admin/overview", { signal });
+export const adminRemove = (resource, id) =>
+  request(`/admin/${resource}/${id}`, { method: "DELETE" });
 
-export const getAdminProfile = (signal) => request("/admin/profile", { signal });
-export const updateProfile = (body) => request("/admin/profile", { method: "PUT", body });
+export const getOverview = (signal) =>
+  request("/admin/overview", { signal });
 
-export const getAdminSettings = (signal) => request("/admin/settings", { signal });
-export const updateSettings = (body) => request("/admin/settings", { method: "PUT", body });
+export const getAdminProfile = (signal) =>
+  request("/admin/profile", { signal });
+
+export const updateProfile = (body) =>
+  request("/admin/profile", { method: "PUT", body });
+
+export const getAdminSettings = (signal) =>
+  request("/admin/settings", { signal });
+
+export const updateSettings = (body) =>
+  request("/admin/settings", { method: "PUT", body });
 
 export const getProjectImages = (projectId, signal) =>
   request(`/admin/projects/${projectId}/images`, { signal });
+
 export const addProjectImage = (projectId, body) =>
   request(`/admin/projects/${projectId}/images`, { method: "POST", body });
+
 export const updateProjectImage = (id, body) =>
   request(`/admin/project-images/${id}`, { method: "PUT", body });
-export const removeProjectImage = (id) => request(`/admin/project-images/${id}`, { method: "DELETE" });
 
-export const listMessages = (signal) => request("/admin/messages", { signal });
+export const removeProjectImage = (id) =>
+  request(`/admin/project-images/${id}`, { method: "DELETE" });
+
+export const listMessages = (signal) =>
+  request("/admin/messages", { signal });
+
 export const markMessageRead = (id, isRead) =>
   request(`/admin/messages/${id}`, { method: "PATCH", body: { is_read: isRead } });
-export const removeMessage = (id) => request(`/admin/messages/${id}`, { method: "DELETE" });
+
+export const removeMessage = (id) =>
+  request(`/admin/messages/${id}`, { method: "DELETE" });
 
 /* Seeded artwork plus anything uploaded, for the image picker. */
-export const listMedia = (signal) => request("/admin/media", { signal });
+export const listMedia = (signal) =>
+  request("/admin/media", { signal });
+
 export const removeUpload = (filename) =>
   request(`/admin/uploads/${encodeURIComponent(filename)}`, { method: "DELETE" });
 
 export function uploadFile(file) {
   const body = new FormData();
   body.append("file", file);
-  return request("/admin/uploads", { method: "POST", body, isFormData: true });
+
+  return request("/admin/uploads", {
+    method: "POST",
+    body,
+    isFormData: true,
+  });
 }

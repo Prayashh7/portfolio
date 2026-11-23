@@ -33,6 +33,7 @@ export function issueSession(res, user) {
   const options = { ...cookieOptions(), maxAge: env.sessionMaxAgeMs };
   res.cookie(SESSION_COOKIE, token, { ...options, httpOnly: true });
   res.cookie(CSRF_COOKIE, csrf, { ...options, httpOnly: false });
+  return csrf;
 }
 
 export function clearSession(res) {
