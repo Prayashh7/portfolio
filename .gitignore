@@ -1,0 +1,43 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Secrets — never commit these. Use the .env.example files as the template.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Build output
+dist/
+build/
+.vite/
+frontend/dist/
+
+# Runtime uploads. Anything added through the admin dashboard lives here and
+# belongs on the server, not in the repository. Seeded media is committed.
+backend/public/media/uploads/
+
+# Logs
+logs/
+*.log
+npm-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Editors and OS
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/*
+!.vscode/extensions.json
+
+# Test and coverage
+coverage/
+.nyc_output/
+
+# Local scratch
+tmp/
+*.local

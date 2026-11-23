@@ -1,0 +1,319 @@
+{
+  "profile": {
+    "name": "Prayash Bartaula",
+    "title": "Full-Stack Developer",
+    "tagline": "I build the interface, and the engine behind it.",
+    "short_bio": "Full-stack developer in Hetauda, Nepal. I take web products from an empty repository to a working URL — schema, API, interface, and the motion in between.",
+    "bio": "I'm a full-stack developer based in Hetauda, Nepal. I work across the whole stack because I want to own the whole outcome: the data model, the API, the interface, and the way it all feels under a cursor.\n\nMost of what I know came from building something, deciding it wasn't good enough, and building it again. I'm studying BSc. CSIT at Hetauda City College, but the work on this page came from shipping projects rather than from coursework.\n\nI care about detail more than is strictly efficient. I would rather spend another day on how a page loads than move on with something that only mostly works. What I'm building toward is international client work, and eventually a product company of my own.",
+    "location": "Hetauda, Nepal",
+    "timezone_label": "UTC+05:45",
+    "latitude": 27.428713,
+    "longitude": 85.032242,
+    "email": "prayashb824@gmail.com",
+    "phone": "+977-9840390478",
+    "website_url": "https://prayashbartaula.com.np",
+    "image_url": "/media/prayash-portrait.webp",
+    "image_depth_url": "/media/prayash-portrait-depth.png",
+    "about_image_url": "/media/prayash-about.webp",
+    "resume_url": null,
+    "availability_status": "open",
+    "availability_note": "Open to freelance projects and full-time roles, remote or relocating."
+  },
+
+  "site_settings": {
+    "hero_eyebrow": "Full-Stack Developer — Hetauda, Nepal",
+    "hero_headline": "I build the interface, and the engine behind it.",
+    "hero_lede": "React and Three.js on the surface. Node, Express and PostgreSQL underneath. One person accountable for the whole product.",
+    "hero_primary_cta_label": "View My Work",
+    "hero_primary_cta_href": "#work",
+    "hero_secondary_cta_label": "Let's Work Together",
+    "hero_secondary_cta_href": "#contact",
+    "about_heading": "Behind the work",
+    "about_body": "Where I am, what I'm building toward, and how I like to work.",
+    "services_heading": "What I take on",
+    "services_intro": "Four kinds of work, all of which end with something deployed.",
+    "projects_heading": "Selected work",
+    "projects_intro": "Five builds, in no particular order. Every one of them is live — open them and judge for yourself.",
+    "skills_heading": "The toolkit",
+    "skills_intro": "Grouped by where each thing sits in the stack, not by how impressive it sounds.",
+    "background_heading": "Background",
+    "background_intro": "Study, training, and the parts of the record worth stating plainly.",
+    "contact_heading": "Let's work together",
+    "contact_intro": "I'm available for freelance projects, full-time roles, and collaborations — anywhere in the world. Tell me what you're building.",
+    "contact_form_note": "I read everything that arrives here and reply within a day or two.",
+    "contact_success_message": "Message received. I'll get back to you within a day or two.",
+    "contact_form_enabled": true,
+    "contact_recipient_email": "prayashb824@gmail.com",
+    "footer_note": "Designed and built by Prayash Bartaula. React, Three.js, Node, Express, PostgreSQL.",
+    "seo_title": "Prayash — Full-Stack Developer",
+    "seo_description": "Full-stack developer in Hetauda, Nepal. React, Three.js, Node, Express and PostgreSQL — web products built end to end.",
+    "og_image_url": "/og-image.jpg",
+    "accent_color": "#22D3EE"
+  },
+
+  "projects": [
+    {
+      "name": "Software Company Website",
+      "slug": "software-company-website",
+      "category": "Corporate site",
+      "role": "Design and build",
+      "summary": "A marketing site for a software business, structured around one sequence: what the company does, why it can be trusted, and how to start a conversation.",
+      "description": "A company site has a narrow job, and most of them fail by burying it under decoration. I built this one as a straight line — capability, credibility, contact — and let typography and spacing carry the weight instead of effects. Motion marks the transition between sections and nothing else.\n\nThe layouts change shape between breakpoints rather than scaling down, so the narrow view is its own composition instead of a squeezed copy of the wide one.",
+      "technologies": ["JavaScript", "CSS", "Responsive Layout", "Netlify"],
+      "cover_image_url": "/media/project-software-company.webp",
+      "live_url": "https://software-companyy.netlify.app/",
+      "github_url": null,
+      "year": 2025,
+      "sort_order": 1
+    },
+    {
+      "name": "Mero Bhariya",
+      "slug": "mero-bhariya",
+      "category": "Web platform",
+      "role": "Full build and deployment",
+      "summary": "A multi-page platform running on its own domain, built to carry a complete user journey rather than a single page.",
+      "description": "This build passed the size where you can hold the whole thing in your head, which is exactly where structure starts to earn its keep: components that stay consistent, state that stays predictable, and routes that stay readable as they multiply.\n\nIt runs on its own domain, so DNS, deployment and asset delivery were part of the work rather than something that happened afterwards. Shipping it taught me more about the last ten percent of a project than anything else here.",
+      "technologies": ["JavaScript", "CSS", "Responsive Layout", "Custom Domain"],
+      "cover_image_url": "/media/project-mero-bhariya.webp",
+      "live_url": "https://merobhariya.me/",
+      "github_url": null,
+      "year": 2025,
+      "sort_order": 2
+    },
+    {
+      "name": "Game of Thrones",
+      "slug": "game-of-thrones",
+      "category": "Interactive concept",
+      "role": "Concept and build",
+      "summary": "A themed interactive site — an exercise in committing hard to an atmosphere and letting every other decision follow from it.",
+      "description": "Built as a study in atmosphere. Dark palette, heavy display type, transitions timed to feel deliberate rather than fast. The question I was answering was how far a visual direction can be pushed before it stops being usable — then pulling back to the line just before that.\n\nUseful because restraint is easier to learn from the other side of it.",
+      "technologies": ["JavaScript", "CSS", "Animation", "Netlify"],
+      "cover_image_url": "/media/project-game-of-thrones.webp",
+      "live_url": "https://gamee-of-throne.netlify.app/",
+      "github_url": null,
+      "year": 2024,
+      "sort_order": 3
+    },
+    {
+      "name": "Cafe",
+      "slug": "cafe",
+      "category": "Hospitality site",
+      "role": "Design and build",
+      "summary": "A cafe site built around the two things a visitor actually came for, with the atmosphere arranged around them.",
+      "description": "Hospitality sites fail in a predictable way: they lead with mood and bury the practical information. I put the menu and the essentials where someone hungry looks first, then used imagery and generous spacing to carry the atmosphere around them.\n\nThis one was built narrow-first. Most people looking up a cafe are already outside, on a phone, in a hurry.",
+      "technologies": ["JavaScript", "CSS", "Responsive Layout", "Netlify"],
+      "cover_image_url": "/media/project-cafe.webp",
+      "live_url": "https://mycafe-project.netlify.app/",
+      "github_url": null,
+      "year": 2024,
+      "sort_order": 4
+    },
+    {
+      "name": "Restaurant",
+      "slug": "restaurant",
+      "category": "Hospitality site",
+      "role": "Design and build",
+      "summary": "A second run at the hospitality brief, which made it the most useful comparison in this set.",
+      "description": "Coming back to a problem I had already solved once turned out to be more instructive than starting something new. I could see which decisions had carried over, which had only looked clever the first time, and where the earlier build had been more complicated than the job required.\n\nThe menu structure and the path to getting in touch took most of the attention.",
+      "technologies": ["JavaScript", "CSS", "Responsive Layout", "Netlify"],
+      "cover_image_url": "/media/project-restaurant.webp",
+      "live_url": "https://restaurant077.netlify.app/",
+      "github_url": null,
+      "year": 2024,
+      "sort_order": 5
+    }
+  ],
+
+  "skill_categories": [
+    {
+      "name": "Frontend",
+      "slug": "frontend",
+      "description": "Everything the visitor touches.",
+      "sort_order": 1,
+      "skills": [
+        { "name": "React.js", "level": "advanced" },
+        { "name": "JavaScript (ES6+)", "level": "advanced" },
+        { "name": "Modern CSS", "level": "advanced", "note": "Grid, custom properties, container queries" },
+        { "name": "HTML5", "level": "advanced", "note": "Semantic, accessible markup" },
+        { "name": "React Router", "level": "confident" },
+        { "name": "GSAP", "level": "confident", "note": "Scroll-driven sequences" },
+        { "name": "Three.js", "level": "confident" },
+        { "name": "React Three Fiber", "level": "confident" },
+        { "name": "Responsive Design", "level": "advanced" }
+      ]
+    },
+    {
+      "name": "Backend",
+      "slug": "backend",
+      "description": "APIs and the logic behind the interface.",
+      "sort_order": 2,
+      "skills": [
+        { "name": "Node.js", "level": "confident" },
+        { "name": "Express.js", "level": "confident" },
+        { "name": "REST API Design", "level": "confident" },
+        { "name": "Authentication & Authorization", "level": "confident", "note": "JWT, hashed credentials, route guards" },
+        { "name": "Input Validation", "level": "confident" },
+        { "name": "File Uploads", "level": "working" }
+      ]
+    },
+    {
+      "name": "Database",
+      "slug": "database",
+      "description": "Schema design and the queries that keep it quick.",
+      "sort_order": 3,
+      "skills": [
+        { "name": "PostgreSQL", "level": "confident" },
+        { "name": "SQL", "level": "confident" },
+        { "name": "Schema Design", "level": "confident", "note": "Normalisation, constraints, indexes" },
+        { "name": "Migrations", "level": "confident" }
+      ]
+    },
+    {
+      "name": "Real-Time & Infrastructure",
+      "slug": "realtime-infrastructure",
+      "description": "Live data, deployment, and what happens after launch.",
+      "sort_order": 4,
+      "skills": [
+        { "name": "WebSockets", "level": "working" },
+        { "name": "Deployment", "level": "confident", "note": "Netlify, Render, custom domains" },
+        { "name": "DNS & Domain Setup", "level": "confident" },
+        { "name": "Environment Configuration", "level": "confident" },
+        { "name": "Linux Basics", "level": "working" }
+      ]
+    },
+    {
+      "name": "Tools",
+      "slug": "tools",
+      "description": "The daily kit.",
+      "sort_order": 5,
+      "skills": [
+        { "name": "Git" },
+        { "name": "GitHub" },
+        { "name": "VS Code" },
+        { "name": "Postman" },
+        { "name": "npm" },
+        { "name": "Vite" },
+        { "name": "Figma" }
+      ]
+    },
+    {
+      "name": "Additional",
+      "slug": "additional",
+      "description": "Adjacent skills that make the rest more useful.",
+      "sort_order": 6,
+      "skills": [
+        { "name": "Python", "level": "working" },
+        { "name": "Object-Oriented Programming", "level": "confident" },
+        { "name": "Data Structures & Algorithms", "level": "confident" },
+        { "name": "UI/UX Fundamentals", "level": "confident" },
+        { "name": "Technical Communication", "level": "confident", "note": "Writing for clients in English" }
+      ]
+    }
+  ],
+
+  "services": [
+    {
+      "name": "Full-Stack Web Development",
+      "description": "A complete product rather than a piece of one: database schema, REST API, and the interface on top of it. One person accountable for the whole thing, which means nothing falls into the gap between frontend and backend.",
+      "icon": "layers",
+      "stack": ["React", "Node.js", "Express", "PostgreSQL"],
+      "sort_order": 1
+    },
+    {
+      "name": "Frontend Engineering",
+      "description": "Interfaces built for speed and for feel. Component architecture that survives a second round of features, layouts that hold from a narrow phone to a wide desktop, and motion that directs attention instead of competing for it.",
+      "icon": "monitor",
+      "stack": ["React", "React Router", "Modern CSS", "GSAP"],
+      "sort_order": 2
+    },
+    {
+      "name": "Backend & API Development",
+      "description": "REST APIs with real authentication, validation on every input, and error handling that stays useful in production. The schema gets designed before the first endpoint is written, because that is the part you cannot fix cheaply later.",
+      "icon": "server",
+      "stack": ["Node.js", "Express", "PostgreSQL", "JWT"],
+      "sort_order": 3
+    },
+    {
+      "name": "3D & Interactive Experiences",
+      "description": "WebGL scenes that hold their frame rate on ordinary devices, with a graceful fallback when they cannot. Used where depth and interaction actually earn their weight — not sprinkled over a page as decoration.",
+      "icon": "orbit",
+      "stack": ["Three.js", "React Three Fiber", "GLSL"],
+      "sort_order": 4
+    }
+  ],
+
+  "experience": [],
+
+  "education": [
+    {
+      "institution": "Hetauda City College",
+      "degree": "BSc. Computer Science and Information Technology",
+      "field": "Computer Science and Information Technology",
+      "location": "Hetauda, Nepal",
+      "description": "Four-year programme covering data structures, algorithms, database systems, computer networks, and software engineering. The practical work in this portfolio happens alongside it rather than inside it.",
+      "start_date": "2022-05-01",
+      "end_date": null,
+      "is_current": true,
+      "sort_order": 1
+    }
+  ],
+
+  "certifications": [
+    {
+      "name": "Python Programming Training",
+      "organization": "Hetauda City College",
+      "year": 2025,
+      "description": "Structured training in Python fundamentals, data structures, and object-oriented programming.",
+      "credential_url": null,
+      "sort_order": 1
+    }
+  ],
+
+  "achievements": [
+    {
+      "title": "Five projects live in production",
+      "description": "Designed, built and deployed five web projects, each one taken from an empty repository to a working public URL.",
+      "year": null,
+      "sort_order": 1
+    },
+    {
+      "title": "Shipped on a custom domain",
+      "description": "Mero Bhariya runs on its own domain, which meant owning DNS, deployment and asset delivery alongside the code.",
+      "year": 2025,
+      "sort_order": 2
+    },
+    {
+      "title": "Self-directed across the stack",
+      "description": "Moved from frontend work into Node, Express and PostgreSQL on my own, working from documentation and rebuilds rather than tutorials.",
+      "year": null,
+      "sort_order": 3
+    }
+  ],
+
+  "social_links": [
+    {
+      "platform": "github",
+      "label": "GitHub",
+      "url": "https://github.com/Prayashh7",
+      "handle": "@Prayashh7",
+      "is_visible": true,
+      "sort_order": 1
+    },
+    {
+      "platform": "email",
+      "label": "Email",
+      "url": "mailto:prayashb824@gmail.com",
+      "handle": "prayashb824@gmail.com",
+      "is_visible": true,
+      "sort_order": 2
+    },
+    {
+      "platform": "linkedin",
+      "label": "LinkedIn",
+      "url": "https://www.linkedin.com/",
+      "handle": null,
+      "is_visible": false,
+      "sort_order": 3
+    }
+  ]
+}
